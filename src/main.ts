@@ -1,37 +1,24 @@
 import { Calendar } from "./Calendar";
 import { Expense } from "./Expense";
 import { ExpenseForm } from "./ExpenseForm";
-import { ExpenseService } from "./expenseService";
 import "./style.css";
 
-const createBtn = document.getElementById("create") as HTMLButtonElement;
-
 class CashControl {
-
-  calendar: Calendar = new Calendar(this.refreshCallback);
-  expenseService = new ExpenseService();
-  expense: Expense = new Expense(this.calendar, this.expenseService);
-  expenseForm = new ExpenseForm(this.calendar);
+  _calendar: Calendar = new Calendar(this.refreshCallback.bind(this));
+  _expense: Expense = new Expense(this._calendar);
+  _expenseForm = new ExpenseForm(this._calendar);
 
   constructor() {}
   refreshCallback() {
-    // console.log(this.expense);
-    this.getAll();
-    // this.expense.getByMonthAndYear();
-  }
-
-  getAll() {
-    console.log('called');
+    this._expense.getByMonthAndYear();
   }
 
   bootstrap() {
-    console.log('here');
-    createBtn.onclick = () => {
-      const newExpense = this.expenseForm.onAddExpense();
-      this.expense.addExpense(newExpense);
+    (document.getElementById("create") as HTMLButtonElement).onclick = () => {
+      const newExpense = this._expenseForm.onAddExpense();
+      this._expense.addExpense(newExpense);
     };
   }
-  
 }
 
 new CashControl().bootstrap();

@@ -8,9 +8,9 @@ export class Expense {
   private _expenseService: ExpenseService;
   private _calendar: Calendar;
 
-  constructor(calendar: Calendar, expenseService: ExpenseService) {
+  constructor(calendar: Calendar) {
     this._calendar = calendar;
-    this._expenseService = expenseService;
+    this._expenseService = new ExpenseService();
     this._expensesContainer = document.getElementById(
       "expenses"
     ) as HTMLElement;
@@ -21,17 +21,16 @@ export class Expense {
   cleanAllByLiTree() {
     this._expensesContainer.innerHTML = "";
   }
+  
   getByMonthAndYear() {
     this.cleanAllByLiTree();
-    console.log(this._calendar.getCurrentDate().getMonth());
-    console.log(this._calendar.getCurrentDate().getFullYear());
     const expenses = this._expenseService.getByMonthAndYear(
       this._calendar.getCurrentDate().getMonth(),
       this._calendar.getCurrentDate().getFullYear()
     );
-    console.log(expenses);
+
     expenses.forEach((expense) => {
-      this.appendOnLiTree(expense);
+      this.appendOnTree(expense);
     });
   }
 
@@ -43,12 +42,12 @@ export class Expense {
     return newExpense;
   }
 
-  private appendOnLiTree(expense: IExpense) {
+  private appendOnTree(expense: IExpense) {
     this._expensesContainer.appendChild(this.renderExpenseLi(expense));
   }
 
   addExpense(expense: IExpense) {
     this._expenseService.addNew(expense);
-    this.appendOnLiTree(expense);
+    this.appendOnTree(expense);
   }
 }

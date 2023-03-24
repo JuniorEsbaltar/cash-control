@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="title">Cash control</h1>
+      <div id="calendar-container" class="calendar">
+        <div class="calendar-header">
+          <button class="prev-month-btn">&lt;</button>
+          <div class="month-year"></div>
+          <button class="next-month-btn">&gt;</button>
+        </div>
+      </div>
+      <section class="fields">
+        <label>Name</label>
+        <input id="name" />
+
+        <label> Price</label>
+        <input id="price" />
+
+        <button id="create">add</button>
+      </section>
+      <section class="expenses-container">
+        <ul id="expenses"></ul>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

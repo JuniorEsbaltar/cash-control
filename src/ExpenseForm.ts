@@ -16,7 +16,7 @@ export class ExpenseForm {
     return {
       name: this._nameInput.value,
       price: Number(this._priceInput.value),
-      date: this._calendar.getCurrentDate(),
+      date: new Date(this._calendar.getCurrentDate()),
       isRecursive: false,
     };
   }

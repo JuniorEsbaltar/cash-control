@@ -6,8 +6,8 @@ export class Calendar {
   private readonly nextMonthBtn: HTMLButtonElement;
   private readonly monthYear: HTMLElement;
   private currentDate: Date;
-
-  constructor() {
+  
+  constructor(refreshCallback: () => void) {
     this.container = document.getElementById(
       "calendar-container"
     ) as HTMLElement;
@@ -21,11 +21,13 @@ export class Calendar {
     this.prevMonthBtn.addEventListener("click", () => {
       this.currentDate.setMonth(this.currentDate.getMonth() - 1);
       this.render();
+      refreshCallback();
     });
 
     this.nextMonthBtn.addEventListener("click", () => {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
       this.render();
+      refreshCallback();
     });
   }
 

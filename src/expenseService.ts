@@ -1,7 +1,7 @@
-import { Expense } from "./IExpense";
+import { IExpense } from "./IExpense";
 
 export class ExpenseService {
-  private expenses: Expense[] = [
+  private expenses: IExpense[] = [
     {
       name: "test",
       price: 20,
@@ -28,17 +28,21 @@ export class ExpenseService {
     },
   ];
 
-  getAll(): Expense[] {
+  getAll(): IExpense[] {
     return this.expenses;
   }
 
-  getByMonthAndYear(month: number, year: number): Expense[] {
+  getByMonthAndYear(month: number, year: number): IExpense[] {
+    // console.log(month, year)
+    // console.log(this.expenses[0].date.getMonth());
+    // console.log(this)
+    console.log(this.expenses);
     return this.expenses.filter((expense) => {
       return expense.date.getMonth() === month && expense.date.getFullYear() === year;
     });
   }
 
-  addNew(expense: Expense) {
+  addNew(expense: IExpense) {
     this.expenses.push(expense);
   }
 }

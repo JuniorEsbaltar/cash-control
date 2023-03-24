@@ -1,31 +1,29 @@
-//Generate by chatgpt
-
 export class Calendar {
-  private readonly container: HTMLElement;
-  private readonly prevMonthBtn: HTMLButtonElement;
-  private readonly nextMonthBtn: HTMLButtonElement;
-  private readonly monthYear: HTMLElement;
-  private currentDate: Date;
-  
+  private readonly _container: HTMLElement;
+  private readonly _prevMonthBtn: HTMLButtonElement;
+  private readonly _nextMonthBtn: HTMLButtonElement;
+  private readonly _monthYear: HTMLElement;
+  private _currentDate: Date;
+
   constructor(refreshCallback: () => void) {
-    this.container = document.getElementById(
+    this._container = document.getElementById(
       "calendar-container"
     ) as HTMLElement;
-    this.prevMonthBtn = this.container.querySelector(".prev-month-btn")!;
-    this.nextMonthBtn = this.container.querySelector(".next-month-btn")!;
-    this.monthYear = this.container.querySelector(".month-year")!;
-    this.currentDate = new Date();
+    this._prevMonthBtn = this._container.querySelector(".prev-month-btn")!;
+    this._nextMonthBtn = this._container.querySelector(".next-month-btn")!;
+    this._monthYear = this._container.querySelector(".month-year")!;
+    this._currentDate = new Date();
 
     this.render();
 
-    this.prevMonthBtn.addEventListener("click", () => {
-      this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+    this._prevMonthBtn.addEventListener("click", () => {
+      this._currentDate.setMonth(this._currentDate.getMonth() - 1);
       this.render();
       refreshCallback();
     });
 
-    this.nextMonthBtn.addEventListener("click", () => {
-      this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    this._nextMonthBtn.addEventListener("click", () => {
+      this._currentDate.setMonth(this._currentDate.getMonth() + 1);
       this.render();
       refreshCallback();
     });
@@ -46,14 +44,15 @@ export class Calendar {
       "November",
       "December",
     ];
+    
     const monthYearText =
-      monthNames[this.currentDate.getMonth()] +
+      monthNames[this._currentDate.getMonth()] +
       " " +
-      this.currentDate.getFullYear();
-    this.monthYear.textContent = monthYearText;
+      this._currentDate.getFullYear();
+    this._monthYear.textContent = monthYearText;
   }
 
   getCurrentDate() {
-    return this.currentDate;
+    return this._currentDate;
   }
 }

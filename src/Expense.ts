@@ -18,23 +18,12 @@ export class Expense {
     this.getByMonthAndYear();
   }
 
-  cleanAllByLiTree() {
+  private _cleanAllByLiTree() {
     this._expensesContainer.innerHTML = "";
   }
-  
-  getByMonthAndYear() {
-    this.cleanAllByLiTree();
-    const expenses = this._expenseService.getByMonthAndYear(
-      this._calendar.getCurrentDate().getMonth(),
-      this._calendar.getCurrentDate().getFullYear()
-    );
 
-    expenses.forEach((expense) => {
-      this.appendOnTree(expense);
-    });
-  }
 
-  private renderExpenseLi(expense: IExpense) {
+  private _renderExpenseLi(expense: IExpense) {
     const newExpense = document.createElement("li");
     newExpense.innerHTML = `<span>${expense.name}</span> <span>${moneyFormat(
       expense.price
@@ -42,12 +31,24 @@ export class Expense {
     return newExpense;
   }
 
-  private appendOnTree(expense: IExpense) {
-    this._expensesContainer.appendChild(this.renderExpenseLi(expense));
+  private _appendOnTree(expense: IExpense) {
+    this._expensesContainer.appendChild(this._renderExpenseLi(expense));
+  }
+
+  getByMonthAndYear() {
+    this._cleanAllByLiTree();
+    const expenses = this._expenseService.getByMonthAndYear(
+      this._calendar.getCurrentDate().getMonth(),
+      this._calendar.getCurrentDate().getFullYear()
+    );
+
+    expenses.forEach((expense) => {
+      this._appendOnTree(expense);
+    });
   }
 
   addExpense(expense: IExpense) {
     this._expenseService.addNew(expense);
-    this.appendOnTree(expense);
+    this._appendOnTree(expense);
   }
 }
